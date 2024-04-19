@@ -3,6 +3,7 @@
 import { FormEvent, useState } from "react";
 import Button from "./Button";
 import { useRouter } from "next/navigation";
+import { addUser } from "@/lib/Actions";
 
 const User = () => {
   const router = useRouter();
@@ -21,6 +22,7 @@ const User = () => {
       setIsLoading(true);
       setHasError(false);
       router.push("/content");
+      addUser(nameValue, lastnameValue);
       setNameValue("");
       setLastnameValue("");
     }
