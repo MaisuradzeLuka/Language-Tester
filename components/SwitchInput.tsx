@@ -1,13 +1,20 @@
 "use client";
 
+import { db } from "@/lib/ConnectToDB";
 import { IQuestion } from "@/types";
-import { useState } from "react";
-
-const list = [
-  { id: 1, number: "a.", answer: "  Some kind of answer number 1" },
-  { id: 2, number: "b.", answer: "  Some kind of answer number 2" },
-  { id: 3, number: "c.", answer: "  Some kind of answer number 3" },
-];
+import {
+  setDoc,
+  doc,
+  updateDoc,
+  arrayUnion,
+  getDoc,
+  getDocs,
+  collection,
+  query,
+  where,
+} from "firebase/firestore";
+import { Dispatch, SetStateAction, useState } from "react";
+import Button from "./Button";
 
 interface ISwitchInput {
   data: IQuestion;
@@ -15,6 +22,32 @@ interface ISwitchInput {
 
 const SwitchInput = ({ data }: ISwitchInput) => {
   const [selectedItem, setSelectedItem] = useState(0);
+  const [isDisabled, setIsDisabled] = useState(false);
+
+  const user = JSON.parse(sessionStorage.getItem("user")!);
+
+  const onValueChange = async () => {
+    let userId;
+
+    try {
+      const q = query(
+        collection(db, "users"),
+        where("name", "==", user.name),
+        where("lastName", "==", user.lastname)
+      );
+
+      const querySnapshot = await getDocs(q);
+      userId = querySnapshot.docs[0].id;
+    } catch (error) {
+      throw new Error(`Something went wrong: ${error}`);
+    }
+
+    await updateDoc(doc(db, "users", userId), {
+      ans: arrayUnion(selectedItem),
+    });
+
+    setIsDisabled(true);
+  };
 
   return (
     <div>
@@ -48,6 +81,16 @@ const SwitchInput = ({ data }: ISwitchInput) => {
               </div>
             </li>
           ))}
+
+          <Button
+            title="პასუხი"
+            variant={`self-start ${
+              isDisabled ? "bg-gray-400 text-gray-700" : "bg-yellow text-white"
+            }`}
+            type="button"
+            onClick={onValueChange}
+            disabled={isDisabled}
+          />
         </ul>
       }
     </div>

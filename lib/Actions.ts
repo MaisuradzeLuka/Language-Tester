@@ -1,19 +1,12 @@
-import {
-  collection,
-  addDoc,
-  doc,
-  getDoc,
-  query,
-  getDocs,
-} from "firebase/firestore";
+import { collection, addDoc, query, getDocs } from "firebase/firestore";
 import { db } from "./ConnectToDB";
 import { IQuestion } from "@/types";
 
 export async function addUser(name: string, lastName: string) {
   try {
     await addDoc(collection(db, "users"), {
-      name: { name },
-      lastName: { lastName },
+      name: name,
+      lastName: lastName,
     });
   } catch (error) {
     throw new Error(`Something went wrong: ${error}`);

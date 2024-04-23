@@ -1,6 +1,7 @@
 import Button from "@/components/Button";
 import SwitchInput from "@/components/SwitchInput";
 import { getData } from "@/lib/Actions";
+import Link from "next/link";
 
 const page = async () => {
   const [data] = await getData();
@@ -12,11 +13,13 @@ const page = async () => {
           <SwitchInput key={i} data={question} />
         ))}
 
-        <Button
-          title="დასრულება"
-          variant="bg-yellow text-white self-end"
-          type="submit"
-        />
+        <Link href="results" className="self-end">
+          <Button
+            title="დასრულება"
+            variant="bg-yellow text-white"
+            type="submit"
+          />
+        </Link>
       </form>
     </main>
   );

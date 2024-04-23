@@ -22,6 +22,13 @@ const User = () => {
       setIsLoading(true);
       setHasError(false);
       router.push("/content");
+
+      sessionStorage.clear();
+      sessionStorage.setItem(
+        "user",
+        JSON.stringify({ name: nameValue, lastname: lastnameValue })
+      );
+
       addUser(nameValue, lastnameValue);
       setNameValue("");
       setLastnameValue("");
