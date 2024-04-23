@@ -13,7 +13,7 @@ import {
   query,
   where,
 } from "firebase/firestore";
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import Button from "./Button";
 
 interface ISwitchInput {
@@ -24,7 +24,10 @@ const SwitchInput = ({ data }: ISwitchInput) => {
   const [selectedItem, setSelectedItem] = useState(0);
   const [isDisabled, setIsDisabled] = useState(false);
 
-  const user = JSON.parse(sessionStorage.getItem("user")!);
+  const user =
+    typeof window !== "undefined"
+      ? window.JSON.parse(sessionStorage.getItem("user")!)
+      : false;
 
   const onValueChange = async () => {
     let userId;
