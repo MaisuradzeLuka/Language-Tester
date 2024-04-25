@@ -1,19 +1,11 @@
 "use client";
 
+//prettier-ignore
+import { doc, updateDoc, arrayUnion, getDocs, collection, query, where } from "firebase/firestore";
 import { db } from "@/lib/ConnectToDB";
 import { IQuestion } from "@/types";
-import {
-  setDoc,
-  doc,
-  updateDoc,
-  arrayUnion,
-  getDoc,
-  getDocs,
-  collection,
-  query,
-  where,
-} from "firebase/firestore";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getUserId } from "@/lib/Actions";
 import Button from "./Button";
 
 interface ISwitchInput {
@@ -23,28 +15,26 @@ interface ISwitchInput {
 const SwitchInput = ({ data }: ISwitchInput) => {
   const [selectedItem, setSelectedItem] = useState(0);
   const [isDisabled, setIsDisabled] = useState(false);
+  const [userId, setUserId] = useState("");
 
   const user =
     typeof window !== "undefined"
-      ? window.JSON.parse(sessionStorage.getItem("user")!)
+      ? JSON.parse(sessionStorage.getItem("user")!)
       : false;
 
+  useEffect(() => {
+    const fetchUserId = async () => {
+      const id = await getUserId(user, "id");
+
+      if (typeof id === "string") {
+        setUserId(id);
+      }
+    };
+
+    fetchUserId();
+  }, []);
+
   const onValueChange = async () => {
-    let userId;
-
-    try {
-      const q = query(
-        collection(db, "users"),
-        where("name", "==", user.name),
-        where("lastName", "==", user.lastname)
-      );
-
-      const querySnapshot = await getDocs(q);
-      userId = querySnapshot.docs[0].id;
-    } catch (error) {
-      throw new Error(`Something went wrong: ${error}`);
-    }
-
     await updateDoc(doc(db, "users", userId), {
       ans: arrayUnion(selectedItem),
     });
@@ -63,27 +53,29 @@ const SwitchInput = ({ data }: ISwitchInput) => {
 
       {
         <ul className="flex flex-col gap-4 mt-6 ml-4 text-gray-600">
-          {data?.options.map((option) => (
-            <li
-              className={`flex items-end gap-2 cursor-pointer ${
-                option.id === selectedItem ? "text-yellow" : ""
-              }`}
-              key={option.id}
-              value={option.id}
-              onClick={() => setSelectedItem(option.id)}
-            >
-              <span className="text-xl w-6">{option?.nthOption}</span>
-              <div
-                className={`text-xl rounded-md px-4 py-2 border ${
-                  option.id === selectedItem
-                    ? "border-yellow"
-                    : "border-gray-600"
+          {data?.options.map((option) => {
+            const canChangeColor = option.id === selectedItem && !isDisabled;
+
+            return (
+              <li
+                className={`flex items-end gap-2 cursor-pointer ${
+                  canChangeColor ? "text-yellow" : ""
                 }`}
+                key={option.id}
+                value={option.id}
+                onClick={() => setSelectedItem(option.id)}
               >
-                {option?.option}
-              </div>
-            </li>
-          ))}
+                <span className="text-xl w-6">{option?.nthOption}</span>
+                <div
+                  className={`text-xl rounded-md px-4 py-2 border ${
+                    canChangeColor ? "border-yellow" : "border-gray-600"
+                  }`}
+                >
+                  {option?.option}
+                </div>
+              </li>
+            );
+          })}
 
           <Button
             title="პასუხი"

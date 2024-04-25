@@ -4,12 +4,12 @@ import { getData } from "@/lib/Actions";
 import Link from "next/link";
 
 const page = async () => {
-  const [data] = await getData();
+  const [questionsData] = await getData();
 
   return (
     <main className=" bg-milky-white min-h-screen px-2 py-20">
       <form className="flex flex-col gap-32 bg-white mx-auto border border-gray-200 rounded-md px-4 py-8 lg:w-[960px]">
-        {data.map((question, i) => (
+        {questionsData.map((question, i) => (
           <SwitchInput key={i} data={question} />
         ))}
 
