@@ -35,9 +35,10 @@ const SwitchInput = ({ data }: ISwitchInput) => {
   }, []);
 
   const onValueChange = async () => {
-    await updateDoc(doc(db, "users", userId), {
-      ans: arrayUnion(selectedItem),
-    });
+    !isDisabled &&
+      (await updateDoc(doc(db, "users", userId), {
+        ans: arrayUnion(selectedItem),
+      }));
 
     setIsDisabled(true);
   };
@@ -59,7 +60,7 @@ const SwitchInput = ({ data }: ISwitchInput) => {
             return (
               <li
                 className={`flex items-end gap-2 cursor-pointer ${
-                  canChangeColor ? "text-yellow" : ""
+                  canChangeColor ? "text-yellow" : " "
                 }`}
                 key={option.id}
                 value={option.id}
