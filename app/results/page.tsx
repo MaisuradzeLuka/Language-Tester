@@ -9,17 +9,17 @@ interface IResults {
   fullLength: number;
   correctCount: number;
   wrongCount: number;
-  wrongAnswers: IQuestion[];
 }
 
 interface IResultAnswers {
   userAnswers: number[];
   correctAnswers: number[];
+  wrongAnswers: IQuestion[];
 }
 
 const page = () => {
-  const [resultsData, setResultsData] = useState({} as IResults);
-  const [resultAnswers, setResultAnswers] = useState([] as IResultAnswers);
+  const [resultsCounter, setResultsCounter] = useState({} as IResults);
+  const [resultAnswers, setResultAnswers] = useState({} as IResultAnswers);
 
   const user =
     typeof window !== "undefined"
@@ -31,7 +31,7 @@ const page = () => {
       const userData = await getUserId(user, "user");
       const [questionsData] = await getData();
 
-      handleAnswers(userData, questionsData);
+      handleAnswers(userData as IUserData, questionsData);
     };
 
     fetchUsedData();
@@ -44,10 +44,6 @@ const page = () => {
       (question) => question.correctId
     );
 
-    const wrongAnswers = questionsData.filter(
-      (question) => !userAnswers.includes(question.correctId)
-    );
-
     let correctCount = 0;
 
     userAnswers.forEach((userAnswer) => {
@@ -58,11 +54,17 @@ const page = () => {
 
     const wrongCount = fullLength - correctCount;
 
+    setResultsCounter({ fullLength, correctCount, wrongCount });
+
+    const wrongAnswers = questionsData.filter(
+      (question) => !userAnswers.includes(question.correctId)
+    );
+
     setResultAnswers({
-      userAnswers: userAnswers,
+      userAnswers,
       correctAnswers: correctAnswersArray,
+      wrongAnswers,
     });
-    setResultsData({ fullLength, correctCount, wrongCount, wrongAnswers });
   };
 
   return (
@@ -73,22 +75,27 @@ const page = () => {
 
           <p>
             სწორუ პასუხი:{" "}
-            <span className=" text-green-500">{resultsData.correctCount}</span>/
-            {resultsData.fullLength}
+            <span className=" text-green-500">
+              {resultsCounter.correctCount}
+            </span>
+            /{resultsCounter.fullLength}
           </p>
 
           <p>
             არასწორი პასუხი:{" "}
-            <span className="text-red-500">{resultsData.wrongCount}</span>/
-            {resultsData.fullLength}
+            <span className="text-red-500">{resultsCounter.wrongCount}</span>/
+            {resultsCounter.fullLength}
           </p>
         </div>
 
         <ul>
-          <p className="text-2xl font-medium">არასწორი პასუხები</p>
           <div className="flex flex-col gap-14">
-            {resultsData?.wrongAnswers?.map((wrongAnswer, index) => (
-              <ResultQuestion key={index} question={wrongAnswer} />
+            {resultAnswers?.wrongAnswers?.map((wrongAnswer, index) => (
+              <ResultQuestion
+                key={index}
+                question={wrongAnswer}
+                userAns={resultAnswers.userAnswers}
+              />
             ))}
           </div>
         </ul>
