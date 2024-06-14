@@ -2,7 +2,7 @@
 
 //prettier-ignore
 import { doc, updateDoc, arrayUnion, getDocs, collection, query, where } from "firebase/firestore";
-import { db } from "@/lib/ConnectToDB";
+import { db } from "@/lib/ConnectToDb";
 import { IQuestion } from "@/types";
 import { useEffect, useState } from "react";
 import { getUserId } from "@/lib/Actions";
