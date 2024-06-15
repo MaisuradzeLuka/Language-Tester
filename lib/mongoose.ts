@@ -1,14 +1,15 @@
 import mongoose from "mongoose";
 
-export default async function connectToDb() {
-  let isConnected = false;
+let isConnected = false;
 
+export default async function connectToDb() {
   mongoose.set("strictQuery", true);
 
   if (!process.env.MONGODB_URL) throw new Error("Mongodb url doesnt exist");
   if (isConnected) return console.log("Already connected to db");
+
   try {
-    mongoose.connect(process.env.MONGODB_URL);
+    await mongoose.connect(process.env.MONGODB_URL);
 
     isConnected = true;
   } catch (error: any) {

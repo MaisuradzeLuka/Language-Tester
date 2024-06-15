@@ -7,3 +7,8 @@ export const questionSchema = z.object({
   option3: z.string(),
   correctOption: z.string(),
 });
+
+export const userSchema = z.object({
+  name: z.string().min(3),
+  lastname: z.string().min(3),
+});
