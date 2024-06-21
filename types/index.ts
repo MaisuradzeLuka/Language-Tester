@@ -10,3 +10,13 @@ export interface IUserData {
   lastname: string;
   ans: number[];
 }
+
+export interface IFormInputs {
+  questions: {
+    question: string;
+    option1: string;
+    option2: string;
+    option3: string;
+    correctOption: string;
+  }[];
+}

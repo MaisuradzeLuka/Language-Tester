@@ -18,7 +18,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <ClerkProvider>
-        <body>{children}</body>
+        <body>
+          <main className="w-full h-screen flex justify-center items-center bg-milky-white">
+            {children}
+          </main>
+        </body>
       </ClerkProvider>
     </html>
   );

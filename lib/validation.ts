@@ -1,11 +1,15 @@
 import * as z from "zod";
 
-export const questionSchema = z.object({
+const questionSchema = z.object({
   question: z.string().min(3),
-  option1: z.string(),
-  option2: z.string(),
-  option3: z.string(),
+  option1: z.string().min(1),
+  option2: z.string().min(1),
+  option3: z.string().min(1),
   correctOption: z.string(),
+});
+
+export const questionsSchema = z.object({
+  questions: z.array(questionSchema),
 });
 
 export const userSchema = z.object({
