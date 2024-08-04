@@ -1,50 +1,18 @@
-"use client";
+import AddQuestionForm from "@/components/forms/AddQuestionForm";
+import { fetchUser } from "@/lib/actions/user.actions";
+import { currentUser } from "@clerk/nextjs/server";
 
-import { Form } from "@/components/ui/form";
-import { useForm, useFieldArray } from "react-hook-form"; // Import Controller from react-hook-form
-import { Input } from "@/components/ui/input";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { questionsSchema } from "@/lib/validation";
-import { Button } from "@/components/ui/button";
-import { z } from "zod";
+const Page = async () => {
+  const user = await currentUser();
 
-import QuestionForm from "@/components/forms/QuestionForm";
-import { IFormInputs } from "@/types";
+  if (!user) return null;
 
-const Page = () => {
-  const form = useForm<z.infer<typeof questionsSchema>>({
-    resolver: zodResolver(questionsSchema),
-    defaultValues: {
-      questions: [
-        {
-          question: "",
-          option1: "",
-          option2: "",
-          option3: "",
-          correctOption: "",
-        },
-      ],
-    },
-  });
+  const userInfo = await fetchUser(user.id);
 
-  const { fields, append } = useFieldArray({
-    control: form.control,
-    name: "questions",
-  });
-
-  const onSubmit = (data: IFormInputs) => {
-    console.log(data.questions);
-  };
-
-  const onClick = () => {
-    append({
-      question: "",
-      option1: "",
-      option2: "",
-      option3: "",
-      correctOption: "",
-    });
+  const userDetails = {
+    userId: user.id,
+    name: userInfo ? userInfo?.name : user.firstName ?? "",
+    lastname: userInfo ? userInfo?.lastname : user.lastName ?? "",
   };
 
   return (
@@ -54,33 +22,7 @@ const Page = () => {
           Add questions
         </h1>
 
-        <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-8 rounded-md"
-          >
-            {fields.map((question, index) => (
-              <QuestionForm
-                key={question.id}
-                control={form.control}
-                index={index}
-              />
-            ))}
-
-            <div className="flex justify-between">
-              <Button type="submit" className="hover:bg-yellow">
-                Submit
-              </Button>
-              <Button
-                type="button"
-                onClick={onClick}
-                className="bg-yellow hover:bg-nav-grey"
-              >
-                Add Question
-              </Button>
-            </div>
-          </form>
-        </Form>
+        <AddQuestionForm userDetails={userDetails} />
       </div>
     </section>
   );

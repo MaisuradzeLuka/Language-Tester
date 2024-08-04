@@ -1,4 +1,11 @@
 // "use client";
+import React from "react";
+
+const page = () => {
+  return <div></div>;
+};
+
+export default page;
 
 // import ResultQuestion from "@/components/ResultQuestion";
 // import { getData, getUserId } from "@/lib/Actions";
