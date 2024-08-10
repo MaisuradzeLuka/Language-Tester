@@ -7,6 +7,7 @@ import {
 import { SiTicktick } from "react-icons/si";
 import { PiSignOut, PiSignIn } from "react-icons/pi";
 import Link from "next/link";
+import MobileNav from "./MobileNav";
 
 const Navbar = () => {
   return (
@@ -20,23 +21,27 @@ const Navbar = () => {
         </h1>
       </Link>
 
-      <ul className="font-semibold">
+      <ul className="hidden md:block font-semibold">
         <li className="hover:text-yellow">
           <Link href="/addQuestion">Add question</Link>
         </li>
       </ul>
 
-      <SignedIn>
-        <SignOutButton>
-          <PiSignOut className="text-2xl cursor-pointer" />
-        </SignOutButton>
-      </SignedIn>
+      <div className="flex gap-3">
+        <SignedIn>
+          <SignOutButton>
+            <PiSignOut className="text-2xl cursor-pointer hover:text-red-500" />
+          </SignOutButton>
+        </SignedIn>
 
-      <SignedOut>
-        <SignInButton>
-          <PiSignIn className="text-2xl cursor-pointer" />
-        </SignInButton>
-      </SignedOut>
+        <SignedOut>
+          <SignInButton>
+            <PiSignIn className="text-2xl cursor-pointer hover:text-green-500" />
+          </SignInButton>
+        </SignedOut>
+
+        <MobileNav />
+      </div>
     </nav>
   );
 };

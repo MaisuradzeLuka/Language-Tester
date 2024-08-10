@@ -1,4 +1,4 @@
-import Button from "@/components/Button";
+import Button from "@/components/shared/Button";
 import SwitchInput from "@/components/SwitchInput";
 import Link from "next/link";
 

@@ -6,7 +6,7 @@ import { db } from "@/lib/ConnectToDb";
 import { IQuestion } from "@/types";
 import { useEffect, useState } from "react";
 import { getUserId } from "@/lib/Actions";
-import Button from "./Button";
+import Button from "./shared/Button";
 
 interface ISwitchInput {
   data: IQuestion;
