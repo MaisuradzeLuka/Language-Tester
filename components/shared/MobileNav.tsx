@@ -5,6 +5,7 @@ import {
   SheetClose,
   SheetContent,
 } from "@/components/ui/sheet";
+import { navLinks } from "@/constants";
 
 import Link from "next/link";
 import { RxHamburgerMenu } from "react-icons/rx";
@@ -21,16 +22,13 @@ const MobileNav = () => {
         </SheetTrigger>
         <SheetContent className=" bg-milky-white  text-xl font-semibold">
           <ul className="h-full font-semibold flex flex-col items-center gap-5 text-gray-700 mt-14">
-            <li className="inline hover:text-yellow">
-              <SheetClose asChild>
-                <Link href="/">Home</Link>
-              </SheetClose>
-            </li>
-            <li className="inline hover:text-yellow">
-              <SheetClose asChild>
-                <Link href="/addQuestion">Add question</Link>
-              </SheetClose>
-            </li>
+            {navLinks.map((link) => (
+              <li key={link.id} className="inline hover:text-yellow">
+                <SheetClose asChild>
+                  <Link href={link.path}>{link.name}</Link>
+                </SheetClose>
+              </li>
+            ))}
           </ul>
         </SheetContent>
       </Sheet>

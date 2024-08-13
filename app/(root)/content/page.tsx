@@ -1,5 +1,4 @@
 import Button from "@/components/shared/Button";
-import SwitchInput from "@/components/SwitchInput";
 import Link from "next/link";
 
 const page = async () => {

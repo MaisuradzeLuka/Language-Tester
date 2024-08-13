@@ -39,6 +39,10 @@ const config = {
         "nav-grey": "#37414E",
         "milky-white": "#FCFBF6",
       },
+      backgroundImage: {
+        "image-main":
+          "url('https://www.topuniversities.com/sites/default/files/styles/articles_inline/public/articles/lead-images/aural%20learning.jpeg.webp')",
+      },
       screens: {
         xs: "500px",
       },
