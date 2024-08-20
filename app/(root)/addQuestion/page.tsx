@@ -3,17 +3,17 @@ import { fetchUser } from "@/lib/actions/user.actions";
 import { currentUser } from "@clerk/nextjs/server";
 
 const Page = async () => {
-  const user = await currentUser();
+  // const user = await currentUser();
 
-  if (!user) return null;
+  // if (!user) return null;
 
-  const userInfo = await fetchUser(user.id);
+  // const userInfo = await fetchUser(user.id);
 
-  const userDetails = {
-    userId: user?.id,
-    name: userInfo ? userInfo?.name : user.firstName ?? "",
-    lastname: userInfo ? userInfo?.lastname : user.lastName ?? "",
-  };
+  // const userDetails = {
+  //   userId: user?.id,
+  //   name: userInfo ? userInfo?.name : user.firstName ?? "",
+  //   lastname: userInfo ? userInfo?.lastname : user.lastName ?? "",
+  // };
 
   return (
     <section className="bg-milky-white min-h-screen px-2 py-20">
