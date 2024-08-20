@@ -32,9 +32,9 @@ export async function addQuestions({
 }
 
 export async function retriveQuestions() {
-  await connectToDb();
-
   try {
+    await connectToDb();
+
     return Questions.find();
   } catch (error: any) {
     throw new Error(`Something went wrong: ${error.message}`);
