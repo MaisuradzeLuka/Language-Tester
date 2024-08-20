@@ -1,6 +1,5 @@
 import {
   Sheet,
-  SheetHeader,
   SheetTrigger,
   SheetClose,
   SheetContent,
@@ -20,6 +19,7 @@ const MobileNav = () => {
         >
           <RxHamburgerMenu />
         </SheetTrigger>
+
         <SheetContent className=" bg-milky-white  text-xl font-semibold">
           <ul className="h-full font-semibold flex flex-col items-center gap-5 text-gray-700 mt-14">
             {navLinks.map((link) => (
