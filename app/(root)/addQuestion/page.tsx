@@ -22,7 +22,7 @@ const Page = async () => {
           Add questions
         </h1>
 
-        <AddQuestionForm userDetails={userDetails} />
+        {/* <AddQuestionForm userDetails={userDetails} /> */}
       </div>
     </section>
   );
