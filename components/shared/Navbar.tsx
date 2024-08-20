@@ -18,11 +18,11 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 py-4 px-6 ${
-        path === "/" ? "bg-transparent" : "bg-nav-grey"
-      } text-white z-20`}
+      className={` top-0 left-0 right-0 py-4 px-6 ${
+        path === "/" ? "fixed bg-transparent" : "bg-nav-grey"
+      } text-white z-20 font-mono`}
     >
-      <div className="flex justify-between items-center max-w-[1100px] mx-auto">
+      <div className="flex justify-between items-center">
         <Link href="/">
           <h1 className="flex items-center gap-2 text-white text-xl sm:text-2xl">
             <span className=" text-yellow ">

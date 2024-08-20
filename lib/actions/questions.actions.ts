@@ -30,3 +30,13 @@ export async function addQuestions({
     throw new Error(`Something went wrong: ${error.message}`);
   }
 }
+
+export async function retriveQuestions() {
+  await connectToDb();
+
+  try {
+    return Questions.find();
+  } catch (error: any) {
+    throw new Error(`Something went wrong: ${error.message}`);
+  }
+}

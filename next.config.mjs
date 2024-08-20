@@ -7,6 +7,11 @@ const nextConfig = {
         hostname: "www.topuniversities.com",
         port: "",
       },
+      {
+        protocol: "https",
+        hostname: "encrypted-tbn0.gstatic.com",
+        port: "",
+      },
     ],
   },
 };

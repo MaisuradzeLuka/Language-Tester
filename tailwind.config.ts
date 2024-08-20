@@ -34,6 +34,7 @@ const config = {
       },
       colors: {
         yellow: "#FECC00",
+        "nav-grey": "#37414E",
       },
       backgroundColor: {
         "nav-grey": "#37414E",

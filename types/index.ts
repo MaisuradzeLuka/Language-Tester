@@ -20,3 +20,21 @@ export interface IFormInputs {
     correctOption: string;
   }[];
 }
+
+export interface ITest {
+  _id: string;
+  questions: [
+    {
+      question: string;
+      option1: string;
+      option2: string;
+      option3: string;
+      correctOption: string;
+      _id: string;
+    }
+  ];
+  author: string;
+  authorId: string;
+  title: string;
+  __v: number;
+}

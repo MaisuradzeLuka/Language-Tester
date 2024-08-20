@@ -11,7 +11,7 @@ const Button = ({ title, variant, onClick, type, disabled }: IButton) => {
     <button
       type={type}
       className={`px-8 py-3 rounded-full text-lg ${variant}`}
-      onClick={onClick}
+      onClick={() => onClick}
       disabled={disabled}
     >
       {title}
