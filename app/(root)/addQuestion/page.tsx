@@ -3,7 +3,7 @@ import { fetchUser } from "@/lib/actions/user.actions";
 import { currentUser } from "@clerk/nextjs/server";
 
 const Page = async () => {
-  // const user = await currentUser();
+  const user = await currentUser();
 
   // if (!user) return null;
 
