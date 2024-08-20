@@ -24,10 +24,10 @@ export async function updateUser({ userId, name, lastname }: IUpdateUser) {
 }
 
 export async function fetchUser(userId: string) {
-  await connectToDb();
-
   try {
-    return await User.findOne({ userId });
+    connectToDb();
+
+    return await User.findOne({ id: userId });
   } catch (error: any) {
     throw new Error(`Something went wrong: ${error.message}`);
   }
