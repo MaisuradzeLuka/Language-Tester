@@ -4,7 +4,7 @@ import {
   SignOutButton,
   SignedIn,
   SignedOut,
-  SignInButton,
+  SignUpButton,
 } from "@clerk/nextjs";
 import { SiTicktick } from "react-icons/si";
 import { PiSignOut, PiSignIn } from "react-icons/pi";
@@ -48,9 +48,9 @@ const Navbar = () => {
           </SignedIn>
 
           <SignedOut>
-            <SignInButton>
+            <SignUpButton>
               <PiSignIn className="text-2xl cursor-pointer hover:text-green-500" />
-            </SignInButton>
+            </SignUpButton>
           </SignedOut>
 
           <MobileNav />

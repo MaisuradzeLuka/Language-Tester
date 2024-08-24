@@ -18,7 +18,7 @@ const page = async () => {
           <Link
             key={test._id}
             className="w-full rounded-xl shadow-slate-800 shadow-lg hover:scale-105 duration-75"
-            href="#"
+            href="/app/(root)/exercises/exercise"
           >
             <Image
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwKefSyvMP__x62IHxBfgxpvFw4BFa99N3wg&s"

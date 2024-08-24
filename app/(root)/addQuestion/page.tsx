@@ -9,6 +9,8 @@ const Page = async () => {
 
   const userInfo = await fetchUser(user.id);
 
+  console.log(userInfo);
+
   // const userDetails = {
   //   userId: user?.id,
   //   name: userInfo ? userInfo?.name : user.firstName ?? "",
