@@ -1,5 +1,3 @@
-"use client";
-
 import AddQuestionForm from "@/components/forms/AddQuestionForm";
 import { fetchUser } from "@/lib/actions/user.actions";
 import { currentUser } from "@clerk/nextjs/server";
@@ -10,9 +8,6 @@ const Page = async () => {
   if (!user) return null;
 
   const userInfo = await fetchUser(user.id);
-
-  console.log(user);
-  console.log(userInfo);
 
   // const userDetails = {
   //   userId: user?.id,
@@ -27,7 +22,8 @@ const Page = async () => {
           Add questions
         </h1>
 
-        {/* <AddQuestionForm userDetails={userDetails} /> */}
+        <AddQuestionForm user={user.id} userInfo={userInfo} />
+        {/* userDetails={userDetails} */}
       </div>
     </section>
   );

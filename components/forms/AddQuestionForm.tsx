@@ -14,76 +14,80 @@ interface IUserDetails {
   userDetails: { userId: string; name: string; lastname: string };
 }
 
-const AddQuestionForm = ({ userDetails }: IUserDetails) => {
-  const form = useForm<z.infer<typeof questionsSchema>>({
-    resolver: zodResolver(questionsSchema),
-    defaultValues: {
-      questions: [
-        {
-          question: "",
-          option1: "",
-          option2: "",
-          option3: "",
-          correctOption: "",
-        },
-      ],
-    },
-  });
+const AddQuestionForm = ({ user, userInfo }: IUserDetails) => {
+  console.log(user);
+  console.log(userInfo);
 
-  const { fields, append } = useFieldArray({
-    control: form.control,
-    name: "questions",
-  });
+  // const form = useForm<z.infer<typeof questionsSchema>>({
+  //   resolver: zodResolver(questionsSchema),
+  //   defaultValues: {
+  //     questions: [
+  //       {
+  //         question: "",
+  //         option1: "",
+  //         option2: "",
+  //         option3: "",
+  //         correctOption: "",
+  //       },
+  //     ],
+  //   },
+  // });
 
-  const onSubmit = async (data: IFormInputs) => {
-    await addQuestions({
-      questionsData: data,
-      author: userDetails.name + " " + userDetails.lastname,
-      authorId: userDetails.userId,
-      title: "firsttitle",
-    });
+  // const { fields, append } = useFieldArray({
+  //   control: form.control,
+  //   name: "questions",
+  // });
 
-    form.reset();
-  };
+  // const onSubmit = async (data: IFormInputs) => {
+  //   await addQuestions({
+  //     questionsData: data,
+  //     author: userDetails.name + " " + userDetails.lastname,
+  //     authorId: userDetails.userId,
+  //     title: "firsttitle",
+  //   });
 
-  const onClick = () => {
-    append({
-      question: "",
-      option1: "",
-      option2: "",
-      option3: "",
-      correctOption: "",
-    });
-  };
+  //   form.reset();
+  // };
+
+  // const onClick = () => {
+  //   append({
+  //     question: "",
+  //     option1: "",
+  //     option2: "",
+  //     option3: "",
+  //     correctOption: "",
+  //   });
+  // };
 
   return (
-    <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-8 rounded-md"
-      >
-        {fields.map((question, index) => (
-          <QuestionForm
-            key={question.id}
-            control={form.control}
-            index={index}
-          />
-        ))}
+    <div></div>
+    // <Form {...form}>
+    //   <form
+    //     onSubmit={form.handleSubmit(onSubmit)}
+    //     className="space-y-8 rounded-md"
+    //   >
+    //     {fields.map((question, index) => (
+    //       <QuestionForm
+    //         key={question.id}
+    //         control={form.control}
+    //         index={index}
+    //       />
+    //     ))}
 
-        <div className="flex justify-between">
-          <Button type="submit" className="hover:bg-yellow">
-            Submit
-          </Button>
-          <Button
-            type="button"
-            onClick={onClick}
-            className="bg-yellow hover:bg-nav-grey"
-          >
-            Add Question
-          </Button>
-        </div>
-      </form>
-    </Form>
+    //     <div className="flex justify-between">
+    //       <Button type="submit" className="hover:bg-yellow">
+    //         Submit
+    //       </Button>
+    //       <Button
+    //         type="button"
+    //         onClick={onClick}
+    //         className="bg-yellow hover:bg-nav-grey"
+    //       >
+    //         Add Question
+    //       </Button>
+    //     </div>
+    //   </form>
+    // </Form>
   );
 };
 
