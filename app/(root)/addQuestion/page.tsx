@@ -1,3 +1,5 @@
+"use client";
+
 import AddQuestionForm from "@/components/forms/AddQuestionForm";
 import { fetchUser } from "@/lib/actions/user.actions";
 import { currentUser } from "@clerk/nextjs/server";
@@ -9,6 +11,7 @@ const Page = async () => {
 
   const userInfo = await fetchUser(user.id);
 
+  console.log(user);
   console.log(userInfo);
 
   // const userDetails = {
