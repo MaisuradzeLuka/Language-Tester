@@ -14,7 +14,7 @@ interface IUserDetails {
   userDetails: { userId: string; name: string; lastname: string };
 }
 
-const AddQuestionForm = ({ user, userInfo }: IUserDetails) => {
+const AddQuestionForm = ({ user, userInfo }: { user: any; userInfo: any }) => {
   console.log(user);
   console.log(userInfo);
 
