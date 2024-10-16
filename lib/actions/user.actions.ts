@@ -26,8 +26,6 @@ export async function updateUser({ userId, name, lastname }: IUpdateUser) {
 export async function fetchUser(userId: string) {
   await connectToDb();
 
-  // console.log(userId);
-
   try {
     return await User.findOne({ userId });
   } catch (error: any) {

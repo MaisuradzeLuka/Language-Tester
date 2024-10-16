@@ -7,13 +7,13 @@ const Page = async () => {
 
   if (!user) return null;
 
-  const userInfo = "await fetchUser(user.id)";
+  const userInfo = await fetchUser(user.id);
 
-  // const userDetails = {
-  //   userId: user?.id,
-  //   name: userInfo ? userInfo?.name : user.firstName ?? "",
-  //   lastname: userInfo ? userInfo?.lastname : user.lastName ?? "",
-  // };
+  const userDetails = {
+    userId: user?.id,
+    name: userInfo ? userInfo?.name : user.firstName ?? "",
+    lastname: userInfo ? userInfo?.lastname : user.lastName ?? "",
+  };
 
   return (
     <section className="bg-milky-white min-h-screen px-2 py-20">
@@ -22,8 +22,7 @@ const Page = async () => {
           Add questions
         </h1>
 
-        <AddQuestionForm user={user.id} userInfo={userInfo} />
-        {/* userDetails={userDetails} */}
+        <AddQuestionForm user={user.id} userInfo={userDetails} />
       </div>
     </section>
   );
