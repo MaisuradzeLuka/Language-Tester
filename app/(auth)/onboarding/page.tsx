@@ -21,7 +21,7 @@ const page = async () => {
         დაასრულე ავტორიზაცია
       </h1>
 
-      <UserDetails userDetails={userDetails} />
+      {/* <UserDetails userDetails={userDetails} /> */}
     </div>
   );
 };
