@@ -1,5 +1,5 @@
 import UserDetails from "@/components/forms/UserDetails";
-import { fetchUser } from "@/lib/actions/user.actions";
+
 import { currentUser } from "@clerk/nextjs/server";
 
 const page = async () => {
@@ -7,12 +7,10 @@ const page = async () => {
 
   if (!user) return null;
 
-  const userInfo = await fetchUser(user.id);
-
   const userDetails = {
     userId: user?.id,
-    name: userInfo ? userInfo?.username : user.username ?? "",
-    lastname: userInfo ? userInfo?.lastname : user.lastName ?? "",
+    name: user?.username || "",
+    lastname: user?.lastName || "",
   };
 
   return (
